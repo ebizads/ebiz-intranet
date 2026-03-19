@@ -17,30 +17,40 @@ export interface IDhiveheroWebPartProps {
 
 export default class DhiveheroWebPart extends BaseClientSideWebPart<IDhiveheroWebPartProps> {
   public render(): void {
+    const uid = (this.instanceId || "x").replace(/-/g, "").substring(0, 8);
+
+    const hexSvg = (n: number): string => `
+      <svg class="${styles.hexSvg}" viewBox="0 0 100 86" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="hg${uid}${n}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#47A247"/>
+            <stop offset="100%" stop-color="#EE7623"/>
+          </linearGradient>
+          <linearGradient id="hl${uid}${n}" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.45)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </linearGradient>
+        </defs>
+        <polygon points="25,1 75,1 99,43 75,85 25,85 1,43"
+          fill="#f5f5f5"
+          stroke="url(#hg${uid}${n})"
+          stroke-width="2"/>
+        <polygon points="25,1 75,1 99,43 75,85 25,85 1,43"
+          fill="url(#hl${uid}${n})"/>
+      </svg>`;
+
+    const hexCell = (icon: string, n: number): string => `
+      <div class="${styles.hexCell}">
+        ${icon ? `<img src="${icon}" class="${styles.hexImage}" />` : ""}
+        ${hexSvg(n)}
+      </div>`;
+
     this.domElement.innerHTML = `
-    <div class="${styles.heroSection} ">
-      
-      <div class="${styles.heroText}">
-        <h1>
-          We <span class="${styles.gradientHeading}"> LISTEN, UNDERSTAND, COLLABORATE</span>
-          to provide Innovative Solutions.
+      <div class="${styles.heroContainer}">
+        <h1 class="${styles.heroTitle}">
+          We <span class="${styles.heroHighlight}">LISTEN, UNDERSTAND,<br/>COLLABORATE</span>
+          to provide<br/>Innovative Solutions.
         </h1>
-      </div>
-
-<div class="${styles.hexWrapper}">
-
-  <!-- HEX 12 -->
-  <a href="#" class="${styles.hexLink}" style="top:18%; right:8%; width:280px; height:240px;">
-    <img src="${bee}"
-         class="${styles.hexImage}" />
-    <svg class="${styles.hexSvg}" viewBox="0 0 100 86">
-      <polygon points="25,1 75,1 99,43 75,85 25,85 1,43"
-        class="${styles.hexBorder}"
-        stroke="#f28c28"/>
-    </svg>
-  </a>
-
-  <!-- HEX 2 -->
   <a href="#" class="${styles.hexLink}" style="top:10%; right:35%; width:180px; height:155px;">
     <img src="${honeyjar}"
          class="${styles.hexImage}" />
@@ -50,44 +60,38 @@ export default class DhiveheroWebPart extends BaseClientSideWebPart<IDhiveheroWe
         stroke="#7fb069"/>
     </svg>
   </a>
+        <div class="${styles.hexGrid}">
 
-  <!-- HEX 3 -->
-  <a href="#" class="${styles.hexLink}" style="top:5%; right:20%; width:100px; height:86px;">
-    <img src="${honey}"
-         class="${styles.hexImage}" />
-    <svg class="${styles.hexSvg}" viewBox="0 0 100 86">
-      <polygon points="25,1 75,1 99,43 75,85 25,85 1,43"
-        class="${styles.hexBorder}"
-        stroke="#f28c28"/>
-    </svg>
-  </a>
+          <div class="${styles.hexRow}">
+            ${hexCell("", 1)}
+            ${hexCell(bee, 2)}
+            ${hexCell("", 3)}
+            ${hexCell("", 4)}
+          </div>
 
-  <!-- HEX 4 -->
-  <a href="#" class="${styles.hexLink}" style="bottom:15%; right:30%; width:240px; height:206px;">
-    <img src="https://via.placeholder.com/400"
-         class="${styles.hexImage}" />
-    <svg class="${styles.hexSvg}" viewBox="0 0 100 86">
-      <polygon points="25,1 75,1 99,43 75,85 25,85 1,43"
-        class="${styles.hexBorder}"
-        stroke="#7fb069"/>
-    </svg>
-  </a>
+          <div class="${styles.hexRow} ${styles.hexRowShift}">
+            ${hexCell(honeyjar, 5)}
+            ${hexCell("", 6)}
+            ${hexCell(honey, 7)}
+            ${hexCell("", 8)}
+          </div>
 
-  <!-- HEX 5 -->
-  <a href="#" class="${styles.hexLink}" style="bottom:5%; right:12%; width:160px; height:138px;">
-    <img src="https://via.placeholder.com/300"
-         class="${styles.hexImage}" />
-    <svg class="${styles.hexSvg}" viewBox="0 0 100 86">
-      <polygon points="25,1 75,1 99,43 75,85 25,85 1,43"
-        class="${styles.hexBorder}"
-        stroke="#f28c28"/>
-    </svg>
-  </a>
+          <div class="${styles.hexRow}">
+            ${hexCell("", 9)}
+            ${hexCell(honeyjar, 10)}
+            ${hexCell("", 11)}
+            ${hexCell("", 12)}
+          </div>
 
-</div>
+          <div class="${styles.hexRow} ${styles.hexRowShift}">
+            ${hexCell(bee, 13)}
+            ${hexCell("", 14)}
+            ${hexCell("", 15)}
+          </div>
 
-    </div>
-  `;
+        </div>
+      </div>
+    `;
   }
 
   protected get dataVersion(): Version {
