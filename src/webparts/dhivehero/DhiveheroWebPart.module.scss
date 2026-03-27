@@ -14,7 +14,7 @@
 
 .heroTitle {
   margin-top: 10rem;
-  font-size: 56px;
+  font-size: 40px;
   line-height: 1.3;
   text-align: left;
   color: #1f1f1f;
@@ -25,7 +25,7 @@
 .heroHighlight {
   background: linear-gradient(90deg, #47a247, #ee7623);
   -webkit-background-clip: text;
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 700;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -34,19 +34,25 @@
 /* ── Honeycomb grid ─────────────────────────────── */
 .hexGrid {
   position: absolute;
-  right: -5%;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   width: 62%;
+  border: #1f1f1f 1px solid;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   z-index: 1;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
 }
 
 .hexRow {
   display: flex;
-  margin-top: -28px;
+  gap: 12px;
+  margin-top: 6px;
 
   &:first-child {
     margin-top: 0;
@@ -54,7 +60,7 @@
 }
 
 .hexRowShift {
-  margin-left: 65px;
+  margin-left: 71px;
 }
 
 .hexCell {
@@ -92,9 +98,34 @@
   z-index: 2;
   pointer-events: none;
 }
+.hexCell {
+  position: relative;
+  width: 100px;
+  height: 86px;
+}
 
+/* LARGE (default) */
+.lg {
+  width: 100px;
+  height: 86px;
+}
+
+/* MEDIUM */
+.md {
+  width: 70px;
+  height: 60px;
+}
+
+/* SMALL */
+.sm {
+  width: 50px;
+  height: 43px;
+}
+
+/* Make SVG fill container */
 .hexSvg {
   position: absolute;
+  transform: rotate(90deg);
   top: 0;
   left: 0;
   width: 100%;
@@ -106,6 +137,10 @@
 .hexBorder {
   fill: none;
   stroke-width: 2;
+}
+
+.hexHidden {
+  visibility: hidden;
 }
 
 @media (max-width: 768px) {
@@ -124,7 +159,8 @@
     position: static;
     transform: none;
     width: 100%;
-    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
     align-items: center;
   }
 }

@@ -39,11 +39,16 @@ export default class DhiveheroWebPart extends BaseClientSideWebPart<IDhiveheroWe
           fill="url(#hl${uid}${n})"/>
       </svg>`;
 
-    const hexCell = (icon: string, n: number): string => `
-      <div class="${styles.hexCell}">
-        ${icon ? `<img src="${icon}" class="${styles.hexImage}" />` : ""}
-        ${hexSvg(n)}
-      </div>`;
+    const hexCell = (
+      icon: string,
+      n: number,
+      size: "sm" | "md" | "lg" = "lg",
+      hidden = false,
+    ): string => `
+  <div class="${styles.hexCell} ${styles[size]} ${hidden ? styles.hexHidden : ""}">
+    ${icon ? `<img src="${icon}" class="${styles.hexImage}" />` : ""}
+    ${hexSvg(n)}
+  </div>`;
 
     this.domElement.innerHTML = `
       <div class="${styles.heroContainer}">
@@ -51,42 +56,37 @@ export default class DhiveheroWebPart extends BaseClientSideWebPart<IDhiveheroWe
           We <span class="${styles.heroHighlight}">LISTEN, UNDERSTAND,<br/>COLLABORATE</span>
           to provide<br/>Innovative Solutions.
         </h1>
-  <a href="#" class="${styles.hexLink}" style="top:10%; right:35%; width:180px; height:155px;">
-    <img src="${honeyjar}"
-         class="${styles.hexImage}" />
-    <svg class="${styles.hexSvg}" viewBox="0 0 100 86">
-      <polygon points="25,1 75,1 99,43 75,85 25,85 1,43"
-        class="${styles.hexBorder}"
-        stroke="#7fb069"/>
-    </svg>
-  </a>
+
         <div class="${styles.hexGrid}">
 
-          <div class="${styles.hexRow}">
-            ${hexCell("", 1)}
-            ${hexCell(bee, 2)}
-            ${hexCell("", 3)}
-            ${hexCell("", 4)}
-          </div>
-
-          <div class="${styles.hexRow} ${styles.hexRowShift}">
-            ${hexCell(honeyjar, 5)}
-            ${hexCell("", 6)}
-            ${hexCell(honey, 7)}
-            ${hexCell("", 8)}
+          <div class="${styles.hexRow}  ${styles.hexRowShift}">
+            ${hexCell("", 0, "lg", true)}
+            ${hexCell("", 1, "lg", true)}
+            ${hexCell("", 2, "lg")}
+            ${hexCell("", 3, "lg")}
+            ${hexCell("", 4, "lg", true)}
           </div>
 
           <div class="${styles.hexRow}">
-            ${hexCell("", 9)}
-            ${hexCell(honeyjar, 10)}
-            ${hexCell("", 11)}
-            ${hexCell("", 12)}
+            ${hexCell("", 5, "lg", true)}
+            ${hexCell("", 6, "lg", true)}
+            ${hexCell(bee, 7, "lg")}
+            ${hexCell("", 8, "lg")}
+            ${hexCell("", 9, "lg")}
           </div>
 
-          <div class="${styles.hexRow} ${styles.hexRowShift}">
-            ${hexCell(bee, 13)}
-            ${hexCell("", 14)}
-            ${hexCell("", 15)}
+          <div class="${styles.hexRow}  ${styles.hexRowShift}">
+            ${hexCell(honeyjar, 10, "lg")}
+            ${hexCell("", 11, "lg")}
+            ${hexCell(honey, 12, "lg")}
+            ${hexCell("", 13, "lg")}
+          </div>
+
+          <div class="${styles.hexRow}">
+            ${hexCell(honeyjar, 14, "lg")}
+            ${hexCell("", 15, "lg")}
+            ${hexCell("", 16, "lg")}
+            ${hexCell("", 17, "lg")}
           </div>
 
         </div>
