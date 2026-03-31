@@ -14,7 +14,7 @@
 
 .heroTitle {
   margin-top: 10rem;
-  font-size: 40px;
+  font-size: 24px;
   line-height: 1.3;
   text-align: left;
   color: #1f1f1f;
@@ -25,7 +25,7 @@
 .heroHighlight {
   background: linear-gradient(90deg, #47a247, #ee7623);
   -webkit-background-clip: text;
-  font-size: 48px;
+  font-size: 32px;
   font-weight: 700;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -34,10 +34,10 @@
 /* ── Honeycomb grid ─────────────────────────────── */
 .hexGrid {
   position: absolute;
-  right: -20%;
   top: 40%;
+  margin-left: 50%;
   transform: translateY(-50%);
-  width: 62%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -146,21 +146,53 @@
 @media (max-width: 768px) {
   .heroContainer {
     flex-direction: column;
+    align-items: center;
     min-height: auto;
+    height: auto;
+    width: 100%;
     padding: 2rem 1.5rem;
   }
 
   .heroTitle {
     max-width: 100%;
+    margin-top: 2rem;
     text-align: center;
   }
 
   .hexGrid {
     position: static;
     transform: none;
+    margin-left: 0;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
+  }
+
+  .hexRow {
+    gap: 6px;
+    margin-top: 3px;
+  }
+
+  .hexRowShift {
+    margin-left: 31px;
+  }
+
+  .hexCell,
+  .lg {
+    width: 50px;
+    height: 43px;
+  }
+
+  .md {
+    width: 36px;
+    height: 31px;
+  }
+
+  .sm {
+    width: 28px;
+    height: 24px;
   }
 }
